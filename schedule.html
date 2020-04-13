@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Your current schedule</h1>
+    <table>
+        <tr>
+            <th>Class Name</th>
+            <th>Class Code</th>
+            <th>Professor</th>
+            <th>Days</th>
+            <th>Time</th>
+            <th>Location</th>
+        </tr>
+        {% for class in classes %}
+            <tr>
+                <td>{{ class.className }}</td>
+                <td>{{ class.classCode }}</td>
+                <td>{{ class.professor }}</td>
+                <td>{{ class.days }}</td>
+                <td>{{ class.time }}</td>
+                <td>{{ class.location }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+</html>

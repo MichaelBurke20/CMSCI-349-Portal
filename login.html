@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Reusing base.html template through extends template inheritance-->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Sign In</h1>
+    <!--Using a POST request makes for a better user experience because requests of this type can submit the form
+    data in the body of the request, while GET requests add the form fields to the URL, cluttering the browser address
+    bar. novalidate attribute tells the web browser to not apply validation to the fields in this form-->
+    <form action="" method="post" novalidate>
+        <!--Generates a hidden field that includes a token that is used to protect the from from CSRF attacks-->
+        <!--Need SECRET_KEY defined in Flask configuration and this hidden form to protect form-->
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            <!--Any fields that have validators attached will have error messages added under this line.
+            It is a list because multiple fields can have multiple validators attached and more than one may be
+            providing error messages to display to the user-->
+            {% for error in form.username.errors %}
+            <span style="color:red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
+</html>

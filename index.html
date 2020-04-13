@@ -1,0 +1,15 @@
+<!--Templates help achieve the separation between presentation and business logic-->
+<!--In Flask, templates are written as separate files, stored in a templates folder that is inside the app package-->
+<!DOCTYPE html>
+<html lang="en">
+<!--base.html template takes care of the general page structure-->
+<!--The extends statement establishes the inheritance link between the two templates-->
+<!--When index.html is rendered, it needs to be embedded inside base.html-->
+<!--The two templates have matching block statements with name content, this is how Jinja2 knows how to combine the 2
+templates into 1-->
+ {% extends "base.html" %}
+
+ {% block content %}
+    <h1>Hi, {{ user.username }}!</h1>
+ {% endblock %}
+</html>

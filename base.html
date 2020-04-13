@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+        <meta charset="UTF-8">
+        <!--If the view function in routes.py forgets to pass a value for the title placeholder, then instead of-->
+        <!--showing an empty title, the template will provide a default one-->
+        {% if title %}
+        <title>{{ title }} - Mount Portal</title>
+        {% else %}
+        <title>Welcome to Mount Portal!</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            Mount Portal:
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('staffLogin') }}">Staff Login</a>
+            <a href="{{ url_for('helpPage') }}">Portal Help</a>
+            <a href="{{ url_for('view') }}">My Schedule</a>
+            <a href="{{ url_for('add') }}">Add Classes</a>
+            <a href="{{ url_for('drop') }}">Drop Classes</a>
+            <a href="{{ url_for('blog') }}">Portal Blog</a>
+        </div>
+        <hr>
+        <!--get_flashed_messages() comes from Flask and returns a list of all the messages that have been registered
+        with flash() previously-->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <!--Block control statement is used to define the place where the derived templates can insert themselves-->
+        <!--Blocks are given a unique name, which derived templates can reference when they provide their content-->
+        {% block content %}{% endblock %}
+    </body>
+</html>
